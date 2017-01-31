@@ -1,0 +1,13 @@
+import os
+import pandas as pd
+
+file_names = []
+data_frames = []
+for filename in os.listdir(path):
+    name = os.path.splitext(filename)[0]
+    file_names.append(name)
+    df = pd.read_csv(filename, header=None)
+    df.rename(columns={0: name}, inplace=True)
+    data_frames.append(df)
+
+combined = pd.concat(data_frames, axis=1)
